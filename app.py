@@ -72,11 +72,6 @@ def main():
                         "role": "user",
                         "content": [
                             {
-                                "type": "text",
-                                "text": "Here is the image of 12 SET cards. Respond only with the final array."
-                                "After you think it through, go back and confirm your answer by matching the cards with the coordinates you provided."
-                            },
-                            {
                                 "type": "image",
                                 "source": {
                                     "type": "base64",
@@ -123,4 +118,4 @@ if __name__ == "__main__":
 # - Better error handling for ambigious cases
 # - Deal with rotated photos
 # - More readable outputs
-
+# - Add Claude authentication
