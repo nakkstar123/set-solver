@@ -9,17 +9,18 @@ from algorithm import find_line_indices  # your custom logic
 
 SYSTEM_PROMPT = (
     "I will upload an image of 12 cards from the SET game. "
-    "You will return an array of 12 points representing the cards. "
-    "The points will have 4 coordinates, each can take values 0,1,2. "
+    "Your job is to interpret the image and return an array of 12 points representing the cards."
+    "You will map each card to a point as follows:"
+    "Each point will have 4 coordinates, each of which can take values 0,1,2. "
     "The first coordinate represents shape: 0 oval, 1 squiggle, 2 diamonds. "
     "The second coordinate represents color: 0 Red, 1 Purple, 2 Green. "
     "The third coordinate represents number: 0 one, 1 two, 2 three. "
     "The fourth coordinate represents shading: 0 solid, 1 striped, 2 outlined. "
-    "Reply only with the final array."
+    "Reply only with the final array of 12 points."
 )
 
 def main():
-    st.title("SET Game Solver (Claude)")
+    st.title("SET Solver")
 
     api_key = st.text_input("Enter your Claude API key:", type="password")
     if api_key:
@@ -39,7 +40,7 @@ def main():
     # A) Upload a file from the local computer
     # -----------------------------------------
     if choice == "Upload a file":
-        uploaded_file = st.file_uploader("Upload your SET image", type=["png", "jpg", "jpeg"])
+        uploaded_file = st.file_uploader("Upload a snapshot of the 12 cards", type=["png", "jpg", "jpeg"])
         if uploaded_file is not None:
             image_bytes = uploaded_file.read()
             # Optionally show a preview
@@ -59,8 +60,8 @@ def main():
             media_type = picture.type
     # Only show the "Process" button if we have an image
     if image_bytes is not None:
-        if st.button("Process Image with Claude"):
-            with st.spinner("Sending to Claude..."):
+        if st.button("Identify the SETs"):
+            with st.spinner("Thinking..."):
                 # Base64-encode the image
                 image_data = base64.b64encode(image_bytes).decode("utf-8")
 
@@ -106,13 +107,13 @@ def main():
                     # st.write(points)
 
                     # Run find_line_indices
-                    st.subheader("Result of find_line_indices")
+                    st.subheader("Results")
                     results = find_line_indices(points)
                     if results:
                         for i, triple in enumerate(results, start=1):
-                            st.write(f"**Line {i}:** {triple}")
+                            st.write(f"**SET {i}:** {triple}")
                     else:
-                        st.write("No lines found.")
+                        st.write("No SETs found.")
                 except Exception as e:
                     st.error(f"Could not parse array from response: {e}")
 
