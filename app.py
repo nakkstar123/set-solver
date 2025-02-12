@@ -116,3 +116,11 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# TODO:
+# - Figure bug with taking photo
+# - Better error handling for ambigious cases
+# - Deal with rotated photos
+# - More readable outputs
+
