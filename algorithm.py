@@ -1,7 +1,7 @@
 import itertools
 
 def points_form_line(p1, p2, p3):
-    # Ensure the points are distinct (if not, we don’t have three different points on a line)
+    # Ensure the points are distinct (if not, we don't have three different points on a line)
     if p1 == p2 or p1 == p3 or p2 == p3:
         return False
 
@@ -23,5 +23,8 @@ def find_line_indices(points):
             attr_tuple = tuple(p1[d] if (p1[d] == p2[d] == p3[d]) else -1 for d in range(4))
             # Append both the triple (using 1-indexing) and the boolean tuple.
             lines.append(((i+1, j+1, k+1), attr_tuple))
+    
+    # Sort lines based on number of non-negative entries in attr_tuple (descending)
+    lines.sort(key=lambda x: sum(1 for val in x[1] if val >= 0), reverse=True)
     
     return lines

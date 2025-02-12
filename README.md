@@ -40,8 +40,10 @@ This project provides a web application (currently uses **Streamlit**) that iden
 
 ## TODO
 
-- [ ] Figure out bug with camera capture (sometimes the photo does not initialize or raises an error).  
+- [ ] Figure out bug with camera capture (only works with upload right now).  
 - [ ] Better error handling for ambiguous cases (e.g., if Claude doesn't parse the image correctly).  
-- [ ] Deal with rotated photos (add orientation correction if needed).  
-- [ ] More readable outputs (improve how lines and sets are displayed).  
+- [ ] Deal with rotated photos (add orientation correction in prompt?).  
+- [x] More readable outputs (improve how lines and sets are displayed).
+- [ ] Add a "hint" button that shows a hint for the user to find a set.
+- [ ] Add "show set" which outputs a grid of cards with highlighted sets.
 - [ ] Add Claude authentication so each user can enter their own key, rather than using a single developer key.

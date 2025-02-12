@@ -123,7 +123,7 @@ def main():
                                 if value != -1:
                                     parts.append(f"{attr_maps[idx][value]}")
                             explanation = ", ".join(parts)
-                        
+                        # algorithm outputs in order of "easiest" to find (most same attributes)
                         with st.expander(f"**SET {i}:** {triple}", expanded=False, icon=None):
                             st.write(explanation)
                 else:
