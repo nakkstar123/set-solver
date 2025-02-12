@@ -122,4 +122,3 @@ if __name__ == "__main__":
 # - Deal with rotated photos
 # - More readable outputs
 # - Add Claude authentication
-# - Try to include set explanations
