@@ -10,10 +10,10 @@ from algorithm import find_line_indices  # your custom logic
 SYSTEM_PROMPT = (
     "You are given an image containing exactly 12 cards from the SET game. "
     "For each card, return a 4-element array of integers: "
-    "1) Shape (0=oval, 1=squiggle, 2=diamond). "
+    "1) Number (0=one, 1=two, 2=three). "
     "2) Color (0=red, 1=purple, 2=green). "
-    "3) Number (0=one, 1=two, 2=three). "
-    "4) Shading (0=solid, 1=striped, 2=outlined). "
+    "3) Shading (0=solid, 1=striped, 2=outlined). "
+    "4) Shape (0=oval, 1=squiggle, 2=diamond). "
     "Reply only with the final array of 12 points and no extra text."
 )
 
@@ -99,14 +99,33 @@ def main():
                 # st.write(points)
                 # print(points)
                 # Run find_line_indices
+                
                 st.subheader("Results")
                 results = find_line_indices(points)
                 if results:
-                    for i, triple in enumerate(results, start=1):
-                        # st.write(f"**SET {i}:** {triple}")
-                        with st.expander(f"**SET {i}:** {triple}", expanded=False, icon=None):
+                    # Mappings for each attribute (index order: Shape, Color, Number, Shading)
+                    attr_maps = [
+                        {0: "single", 1: "double", 2: "triple"},                        
+                        {0: "red", 1: "purple", 2: "green"},
+                        {0: "solid", 1: "striped", 2: "outlined"},
+                        {0: "ovals", 1: "squiggles", 2: "diamonds"}
+                    ]
+                    # attr_names = ["Number", "Color", "Shading", "Shape"]
 
-                            st.write("Explanation for Set " + str(i))
+                    for i, (triple, attr_values) in enumerate(results, start=1):
+                        # If every attribute is -1, then the set is "all different"
+                        if all(val == -1 for val in attr_values):
+                            explanation = "everything different"
+                        else:
+                            parts = []
+                            # Only mention the attributes that are all the same (i.e. not -1)
+                            for idx, value in enumerate(attr_values):
+                                if value != -1:
+                                    parts.append(f"{attr_maps[idx][value]}")
+                            explanation = ", ".join(parts)
+                        
+                        with st.expander(f"**SET {i}:** {triple}", expanded=False, icon=None):
+                            st.write(explanation)
                 else:
                     st.write("No SETs found.")
             except Exception as e:

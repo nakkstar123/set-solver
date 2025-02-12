@@ -11,12 +11,17 @@ def points_form_line(p1, p2, p3):
             return False
     return True
 
+
 def find_line_indices(points):
-    line_indices = []
-    
+    lines = []
     # Iterate over all combinations of 3 distinct indices.
     for i, j, k in itertools.combinations(range(len(points)), 3):
-        if points_form_line(points[i], points[j], points[k]):
-            line_indices.append((i+1, j+1, k+1))
+        p1, p2, p3 = points[i], points[j], points[k]
+        if points_form_line(p1, p2, p3):
+            # Create a 4-tuple of booleans.
+            # For each attribute, return the common value if all are the same; otherwise -1.
+            attr_tuple = tuple(p1[d] if (p1[d] == p2[d] == p3[d]) else -1 for d in range(4))
+            # Append both the triple (using 1-indexing) and the boolean tuple.
+            lines.append(((i+1, j+1, k+1), attr_tuple))
     
-    return line_indices
+    return lines
