@@ -76,6 +76,7 @@ def main():
                                 {
                                     "type": "text",
                                     "text": "Here is the image of 12 SET cards. Respond only with the final array."
+                                    "After you think it through, go back and confirm your answer by matching the cards with the coordinates you provided."
                                 },
                                 {
                                     "type": "image",
