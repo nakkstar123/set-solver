@@ -14,7 +14,6 @@ SYSTEM_PROMPT = (
     "2) Color (0=red, 1=purple, 2=green). "
     "3) Number (0=one, 1=two, 2=three). "
     "4) Shading (0=solid, 1=striped, 2=outlined). "
-    "Return a single top-level array of length 12, one sub-array per card in reading order (left to right, top to bottom). "
     "Reply only with the final array of 12 points and no extra text."
 )
 
