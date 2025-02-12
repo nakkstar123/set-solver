@@ -97,13 +97,16 @@ def main():
 
                 # st.subheader("Parsed Points")
                 # st.write(points)
-
+                # print(points)
                 # Run find_line_indices
                 st.subheader("Results")
                 results = find_line_indices(points)
                 if results:
                     for i, triple in enumerate(results, start=1):
-                        st.write(f"**SET {i}:** {triple}")
+                        # st.write(f"**SET {i}:** {triple}")
+                        with st.expander(f"**SET {i}:** {triple}", expanded=False, icon=None):
+
+                            st.write("Explanation for Set " + str(i))
                 else:
                     st.write("No SETs found.")
             except Exception as e:
@@ -119,3 +122,4 @@ if __name__ == "__main__":
 # - Deal with rotated photos
 # - More readable outputs
 # - Add Claude authentication
+# - Try to include set explanations
