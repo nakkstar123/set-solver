@@ -22,7 +22,7 @@ def find_line_indices(points):
             # For each attribute, return the common value if all are the same; otherwise -1.
             attr_tuple = tuple(p1[d] if (p1[d] == p2[d] == p3[d]) else -1 for d in range(4))
             # Append both the triple (using 1-indexing) and the boolean tuple.
-            lines.append(((i+1, j+1, k+1), attr_tuple))
+            lines.append(((i, j, k), attr_tuple))
     
     # Sort lines based on number of non-negative entries in attr_tuple (descending)
     lines.sort(key=lambda x: sum(1 for val in x[1] if val >= 0), reverse=True)
