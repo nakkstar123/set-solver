@@ -47,21 +47,28 @@ export const GameBoard = () => {
   return (
     <div className="mb-12">
       <h2 className="text-2xl font-semibold mb-6">Game Board</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {mockCards.map((card) => (
-          <div
-            key={card.id}
-            className="relative transition-all duration-200 ease-in-out aspect-[3/4]"
-          >
-            <div className="rounded-lg overflow-hidden shadow-md">
-              <img
-                src={card.imageUrl}
-                alt={`Card ${card.id}`}
-                className="w-full h-full object-cover"
-              />
-            </div>
+      {/* Responsive container with min/max width */}
+      <div className="max-w-3xl mx-auto px-2">
+        {/* Responsive grid container */}
+        <div className="w-full sm:w-[480px] md:w-[600px] mx-auto">
+          <div className="grid grid-cols-4 gap-1 sm:gap-2"> {/* Responsive gap */}
+            {mockCards.map((card) => (
+              <div
+                key={card.id}
+                className="relative transition-all duration-200 ease-in-out"
+              >
+                {/* Responsive card size */}
+                <div className="w-[72px] sm:w-[110px] md:w-[140px] h-[96px] sm:h-[150px] md:h-[180px] rounded-lg overflow-hidden shadow-md">
+                  <img
+                    src={card.imageUrl}
+                    alt={`Card ${card.id}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );
