@@ -149,7 +149,7 @@ def report_model_results(model_name, dataloader, device):
     print(f"Total Time: {sum(time):.2f} seconds")
     print(f"Max Inference Time: {max(time):.2f} seconds")
     print(f"Average Inference Time: {sum(time) / len(time):.2f} seconds")
-    print(f"IPS: {len(time) / sum(time):.2f}")
+    print(f"Throughput: {len(time) / sum(time):.2f} images/second")
 
 # -------------------------------------------------------------------------------------------------
 # Main
@@ -158,4 +158,5 @@ def report_model_results(model_name, dataloader, device):
 def main():
     device = torch.device("cpu")
     print(f"Using device: {device}")
-    report_model_results("v2_full", load_dataloader(load_dataset("data/")), device)
+    for model in ["v2_3", "v2_7", "v2_full", "v3_full"]:
+        report_model_results(model, load_dataloader(load_dataset("data/")), device)
